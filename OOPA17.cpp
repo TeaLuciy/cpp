@@ -11,7 +11,7 @@ private:
     friend std::ostream& operator<<(std::ostream& os, const Alpha& a);
 
 public:
-    Alpha( char* sw = "")
+    Alpha( const char* sw = "")
      {
         _bin[0] = 0;
         _bin[1] = 0;
@@ -79,10 +79,10 @@ int main(int argc, char *argv[])
     Alpha b(argv[2]);
     Alpha ma, mb;
     Alpha mask("AEIOU");
-    std::cout << (a) << std::endl;
-    std::cout << (b) << std::endl;
-    std::cout << (ma = a & mask ) << std::endl;
-    std::cout << (mb = b & mask ) << std::endl;
+    std::cout << "First set:  " << (a) << std::endl;
+    std::cout << "Second set:  " << (b) << std::endl;
+    std::cout << "First masked:  " << (ma = a.operator&(mask)) << std::endl;
+    std::cout << "Second masked:  " << (mb = b & mask ) << std::endl;
     std::cout << ((ma,mb)) << std::endl;
 
     return 0;
