@@ -1,9 +1,4 @@
 
-#include <time.h>
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-#include <math.h>
 #include <iostream>
 using namespace std;
 
@@ -49,22 +44,11 @@ class Line
     public:
         Line (float x1 = 0, float y1= 0, float x2= 0, float y2= 0) : a1(x1, y1), a2(x2, y2){};
         Line (Dot& p, Dot& c): a1(p), a2(c){};
-        float Lenght();
         float Koef();
         float Free();
         
 }; 
 
-
-
-
-
-float Line::Lenght()
-{
-    float d;
-    d = sqrt((a2.x - a1.x) * (a2.x - a1.x) + (a2.y - a1.y)*(a2.y - a1.y));
-    return d;
-}
 
 float Line::Koef()
 {
@@ -96,7 +80,7 @@ int main()
     {
         Line Ln(A,B);
 
-        std::cout << "Коэфицент углового наклона: " << Ln.Koef()<< "\n" << "След: 0;" << Ln.Free() << endl;
+        std::cout << "Коэффициент углового наклона: " << Ln.Koef()<< "\n" << "След: 0;" << Ln.Free() << endl;
         printf("уравнение прямой: y = %.2f * x + %.2f\n", Ln.Koef(), Ln.Free());
         
 
