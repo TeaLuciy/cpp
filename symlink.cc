@@ -63,26 +63,6 @@ int SymLink::print() {
     return min;
 }
 
-    int SymLink::mx()
-{
-    SymLink* p = this;
-    SymLink* q;
-    SymLink* l = NULL;
-    int max = -10;                             
-    
-    while(p != NULL)
-    {
-        if ((p->sym > max) && (p->sym != '\n'))
-        {
-            max = p->sym;
-            l = p;
-        }
-        q=p->incr();
-        p=q;
-    }
-    return max;
-}
-
 
 
 
@@ -158,8 +138,8 @@ int main() {
         tail->before(q); 
     } 
    
-    minim = head->mx();
-    printf("min = %c\n", (head->mx()));
+    minim = head->mn();
+    printf("min = %c\n", (head->mn()));
     while (head->fn(minim))
     {
         head->print();
