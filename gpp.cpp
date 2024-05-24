@@ -3,11 +3,11 @@
 #include <iomanip>
 #include <sys/ioctl.h>//размер экрана
 #include <termios.h>// интерфейс терминала
-#include <fcntl.h>//перенапрвление потока
+#include <fcntl.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <signal.h>//обработка сигнала
-#include <unistd.h>// get of
+#include <signal.h>
+#include <unistd.h>
 
 static int done=0;
 
@@ -67,7 +67,9 @@ int kbin(){
     char buf[512];
     int n=0;
     int flags=fcntl(0,F_GETFL);
-    fcntl(0,F_SETFL,flags | O_NONBLOCK);
+    flags &= ~(ICANON | ECHO);
+    flags |= O_NONBLOCK;
+    fcntl(0,F_SETFL,flags);
     usleep(1);
     n=read(0,buf,512);
     fcntl(0,F_SETFL,flags /* & ~NONBLOCK */);
@@ -75,7 +77,7 @@ int kbin(){
 }
 
 
-int main(int argc, char** argv) {
+int main() {
     int x, y, x1, y1;
     int f = 40;
     int mid1 = con::comax();
@@ -86,10 +88,15 @@ signal(SIGINT, interruptor);
         for (y = 1, x1 = 1; y <= mid2 / 2; ++x1, ++y) { 
             for (x = 1, y1 = 1; x <= mid1; y1++, x++) {
                 cout << SGR(f) << CUP(y, x) << " " << SGR(f) << CUP(mid2 - y + 1, x) << " " << SGR(f) << CUP(y1, x1) << " " << SGR(f) << CUP(y1, mid1 - x1 + 1) << " ";;
-                usleep(5000); 
+                usleep(2000); 
             }
             if (f < 47) f++; else f = 40; 
-            if (kbin() > 0) exit(-1); 
+            if (kbin() > 0)
+            {
+                cout << CUP(1, 1) << SGR(0) <<con::ED;
+                exit(-1);
+                
+            }  
         
     }} 
 
