@@ -14,14 +14,6 @@ int main(int argc, char* argv[])
     if (argc <3)
         return 0;
     
-
-
-
-
-
-
-
-
     ifstream input;
     input.open(argv[1]);
     /*if (input == NULL)
@@ -38,22 +30,22 @@ int main(int argc, char* argv[])
     count = input.tellg();
     input.seekg(0, input.beg);
 
-    cout << count << endl;
 
     int fc;
     fc=count/atoi(argv[2]);
-    cout << fc << endl;
-    string name = argv[1];
-    while(fc)
+    int n =1;
+    char* name = argv[1];
+    while(n < atoi(argv[2])+1)
     {
-        int n = 1;
-        string ind  =  to_string(n);
-        ofstream output(name + to_string(n));
+        char b[100] = "";
+        strcpy (b, argv[1]);
+        sprintf(b+strlen(argv[1]),"%d", n);
+        ofstream output(b);
         char buff[1024];
-        input.read(buff, atoi(argv[2]));
-        output.write(buff, atoi(argv[2]));
+        input.read(buff, fc);
+        output.write(buff, fc);
         output.close();
-        fc--;
+        n++;
     }
     
 
